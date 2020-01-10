@@ -2,8 +2,6 @@
 {
 	public ClassData Class;
 
-	public override float Speed { get { return base.Speed * Class.SpeedRatio; } }
-
 	// Use this for initialization
 	void Start()
 	{

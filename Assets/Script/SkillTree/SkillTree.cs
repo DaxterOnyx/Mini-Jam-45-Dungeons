@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class SkillTree
+public class SkillTree : MonoBehaviour
 {
 	public SkillTreeData Data;
 

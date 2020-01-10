@@ -14,32 +14,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skills:
   - id: 0
-    name: node
-    dependencies: 02000000
+    name: Life +
     unlocked: 0
-    editor_position: {x: 0, y: 0}
-  - id: 1
-    name: node
-    dependencies: 02000000
-    unlocked: 0
-    editor_position: {x: 0, y: 0}
-  - id: 2
-    name: node
+    cost: 0
     dependencies: 
+    editor_position: {x: 97, y: 384}
+  - id: 1
+    name: XP +
     unlocked: 0
-    editor_position: {x: 38, y: 216}
-  - id: 3
-    name: node
-    dependencies: 01000000
-    unlocked: 0
-    editor_position: {x: 547, y: 172}
-  - id: 4
-    name: node
-    dependencies: 0100000000000000
-    unlocked: 0
-    editor_position: {x: 604, y: 298}
-  - id: 5
-    name: node
+    cost: 0
     dependencies: 00000000
+    editor_position: {x: 515, y: 323}
+  - id: 2
+    name: Luck
     unlocked: 0
-    editor_position: {x: 527, y: 420}
+    cost: 0
+    dependencies: 00000000
+    editor_position: {x: 508, y: 594}
+  - id: 3
+    name: crew +
+    unlocked: 0
+    cost: 0
+    dependencies: 01000000
+    editor_position: {x: 831, y: 214}
+  - id: 4
+    name: ??
+    unlocked: 0
+    cost: 0
+    dependencies: 01000000
+    editor_position: {x: 862, y: 387}
+  - id: 5
+    name: XP +
+    unlocked: 0
+    cost: 0
+    dependencies: 02000000
+    editor_position: {x: 863, y: 545}
+  - id: 6
+    name: knock back resist
+    unlocked: 0
+    cost: 0
+    dependencies: 02000000
+    editor_position: {x: 848, y: 714}
+  - id: 7
+    name: life +
+    unlocked: 0
+    cost: 0
+    dependencies: 03000000
+    editor_position: {x: 1183, y: 290}
+  - id: 8
+    name: Life +
+    unlocked: 0
+    cost: 0
+    dependencies: 040000000500000000000000
+    editor_position: {x: 1203, y: 554}

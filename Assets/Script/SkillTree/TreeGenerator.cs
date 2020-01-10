@@ -42,6 +42,7 @@ public class TreeGenerator : MonoBehaviour
             newTile.title.text = skill.name;
             newTile.descripion.text = skill.description;
             newTile.cost.text = skill.cost.ToString();
+            newTile.GetComponent<Button>().interactable = skillTree.CanSkillBeUnlocked(i);
         }
         //foreach (var skill in skillTree.Data.skills)
         //{

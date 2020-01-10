@@ -13,8 +13,24 @@ MonoBehaviour:
   m_Name: Ascension
   m_EditorClassIdentifier: 
   skills:
-  - id: 10
-    name: node
-    dependencies: 
+  - id: 0
+    name: Life +
     unlocked: 0
-    editor_position: {x: 0, y: 0}
+    cost: 0
+    dependencies: 
+    description: add little more life
+    editor_position: {x: 123, y: 139}
+  - id: 1
+    name: Loot +
+    unlocked: 0
+    cost: 0
+    dependencies: 00000000
+    description: get better loots
+    editor_position: {x: 494, y: 80}
+  - id: 2
+    name: XP +
+    unlocked: 0
+    cost: 0
+    dependencies: 00000000
+    description: get bonus experience
+    editor_position: {x: 493, y: 230}

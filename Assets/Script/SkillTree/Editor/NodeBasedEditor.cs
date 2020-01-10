@@ -298,6 +298,10 @@ public class NodeBasedEditor : EditorWindow
 		if (nodes != null && nodes.Count > 0) {
 			// We fill with as many skills as nodes we have
 
+			for (int i = 0; i < nodes.Count; i++) {
+				nodes[i].skill.id = i; 
+			}
+
 			MySkillTree.skills = new Skill[nodes.Count];
 			int[] dependencies;
 			List<int> dependenciesList = new List<int>();

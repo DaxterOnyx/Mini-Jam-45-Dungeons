@@ -8,6 +8,6 @@ public struct Skill
 	public int[] dependencies;
 	public bool unlocked;
 	#region Editor
-	public Vector2 position;
+	public Vector2 editor_position;
 	#endregion
 }

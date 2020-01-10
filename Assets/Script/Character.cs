@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+	public ClassData Class;
+	public CharacterData Data;
+	// Start is called before the first frame update
+	void Start()
     {
         
     }

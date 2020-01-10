@@ -52,7 +52,7 @@ public class Node
 		System.Action<Node> OnClickRemoveNode, int id, bool unlocked, string name, int[] dependencies)
 	{
 		rect = new Rect(position.x, position.y, width, height);
-		skill.position = rect.position;
+		skill.editor_position = rect.position;
 
 		style = nodeStyle;
 
@@ -112,7 +112,7 @@ public class Node
 	public void Drag(Vector2 delta)
 	{
 		rect.position += delta;
-		skill.position = rect.position;
+		skill.editor_position = rect.position;
 		rectID.position += delta;
 		rectUnlocked.position += delta;
 		rectUnlockLabel.position += delta;
@@ -123,7 +123,7 @@ public class Node
 	public void MoveTo(Vector2 pos)
 	{
 		rect.position = pos;
-		skill.position = rect.position;
+		skill.editor_position = rect.position;
 		rectID.position = pos;
 		rectUnlocked.position = pos;
 		rectUnlockLabel.position = pos;

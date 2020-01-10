@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.IO;
 using UnityEditor;
 using UnityEngine;
 
@@ -18,17 +17,17 @@ public class NodeBasedEditor : EditorWindow
 
 	private Vector2 offset;
 	private Vector2 drag;
-	public SkillTree MySkillTree;
-	private Rect rectButtonClear = new Rect(new Vector2(0, 10), new Vector2(50, 20));
-	private Rect rectButtonSave = new Rect(new Vector2(50, 10), new Vector2(50, 20));
-	private Rect rectButtonLoad = new Rect(new Vector2(100, 10), new Vector2(50, 20));
+	public SkillTreeData MySkillTree;
+	private Rect rectButtonClear = new Rect(new Vector2(0, 25), new Vector2(50, 20));
+	private Rect rectButtonSave = new Rect(new Vector2(50, 25), new Vector2(50, 20));
 
 	[MenuItem("Tools/Skill Tree Editor")]
 	static NodeBasedEditor OpenWindow()
 	{
 		NodeBasedEditor window = GetWindow<NodeBasedEditor>();
 		window.titleContent = new GUIContent("Node Based Editor");
-		window.MySkillTree = new SkillTree();
+		window.MySkillTree = ScriptableObject.CreateInstance<SkillTreeData>();
+
 		return window;
 	}
 
@@ -62,6 +61,11 @@ public class NodeBasedEditor : EditorWindow
 		DrawConnections();
 
 		DrawConnectionLine(Event.current);
+		var temp = (SkillTreeData)EditorGUILayout.ObjectField(MySkillTree, typeof(SkillTreeData), allowSceneObjects: false);
+		if (temp != MySkillTree) {
+			MySkillTree = temp;
+			LoadNodes(temp);
+		}
 		DrawButtons();
 
 		ProcessNodeEvents(Event.current);
@@ -286,8 +290,6 @@ public class NodeBasedEditor : EditorWindow
 			ClearNodes();
 		if (GUI.Button(rectButtonSave, "Save"))
 			SaveSkillTree();
-		if (GUI.Button(rectButtonLoad, "Load"))
-			LoadNodes();
 	}
 
 	// Save data from the window to the skill tree
@@ -299,40 +301,40 @@ public class NodeBasedEditor : EditorWindow
 			MySkillTree.skills = new Skill[nodes.Count];
 			int[] dependencies;
 			List<int> dependenciesList = new List<int>();
+			List<Connection> connectionsToRemove = new List<Connection>();
 
 			// Iterate over all of the nodes. Populating the skills with the node info
-			for (int i = 0; i < nodes.Count; ++i) {
+			for (int nodeIndex = 0; nodeIndex < nodes.Count; ++nodeIndex) {
 				if (connections != null) {
-					List<Connection> connectionsToRemove = new List<Connection>();
-					List<ConnectionPoint> connectionsPointsToCheck = new List<ConnectionPoint>();
-
-					for (int j = 0; j < connections.Count; j++) {
-						if (connections[j].inPoint == nodes[i].inPoint) {
-							for (int k = 0; k < nodes.Count; ++k) {
-								if (connections[j].outPoint == nodes[k].outPoint) {
-									dependenciesList.Add(nodes[k].skill.id);
+					for (int connexionIndex = 0; connexionIndex < connections.Count; connexionIndex++) {
+						if (connections[connexionIndex].inPoint == nodes[nodeIndex].inPoint) {
+							bool added = false;
+							for (int dependantIndex = 0; dependantIndex < nodes.Count; ++dependantIndex) {
+								if (connections[connexionIndex].outPoint == nodes[dependantIndex].outPoint) {
+									dependenciesList.Add(nodes[dependantIndex].skill.id);
+									added = true;
 									break;
 								}
 							}
-							connectionsToRemove.Add(connections[j]);
-							connectionsPointsToCheck.Add(connections[j].outPoint);
+							if (!added)
+								connectionsToRemove.Add(connections[connexionIndex]);
 						}
 					}
 				}
 				dependencies = dependenciesList.ToArray();
 				dependenciesList.Clear();
-				MySkillTree.skills[i] = nodes[i].skill;
-				MySkillTree.skills[i].dependencies = dependencies;
+				MySkillTree.skills[nodeIndex] = nodes[nodeIndex].skill;
+				MySkillTree.skills[nodeIndex].dependencies = dependencies;
 			}
 
-			string json = JsonUtility.ToJson(MySkillTree);
-			string path = EditorUtility.SaveFilePanelInProject("Save Skill Tree", "skill tree", "json", "Please enter a file name to save the skill tree to");
+			Debug.LogWarning("connection Weird" + connectionsToRemove.Count);
+			foreach (var item in connectionsToRemove) {
+				connections.Remove(item);
+			}
 
-			// Finally, we write the JSON string with the SkillTree data in our file
-			using (FileStream fs = new FileStream(path, FileMode.Create)) {
-				using (StreamWriter writer = new StreamWriter(fs)) {
-					writer.Write(json);
-				}
+			if (!UnityEditor.AssetDatabase.Contains(MySkillTree)) {
+				string path = EditorUtility.SaveFilePanelInProject("Save Skill Tree", "skill tree", "asset", "Please enter a file name to save the skill tree to", "Data/Skill Trees/");
+				UnityEditor.AssetDatabase.CreateAsset(MySkillTree, path);
 			}
 
 			UnityEditor.AssetDatabase.Refresh();
@@ -342,6 +344,8 @@ public class NodeBasedEditor : EditorWindow
 	// Function for clearing data from the editor window
 	private void ClearNodes()
 	{
+		MySkillTree = ScriptableObject.CreateInstance<SkillTreeData>();
+
 		if (nodes != null && nodes.Count > 0) {
 			Node node;
 			while (nodes.Count > 0) {
@@ -351,59 +355,41 @@ public class NodeBasedEditor : EditorWindow
 		}
 	}
 
-	private void LoadNodes()
+	private void LoadNodes(SkillTreeData skillData)
 	{
 		ClearNodes();
-		Skill[] _skillTree;
-		List<Skill> originNode = new List<Skill>();
-		string path = EditorUtility.OpenFilePanel("Open Skill Tree", "Assets/", "json");
+		MySkillTree = skillData;
 
-		string dataAsJson;
-		Vector2 pos = Vector2.zero;
-		if (File.Exists(path)) {
-			// Read the json from the file into a string
-			dataAsJson = File.ReadAllText(path);
+		// Store the SkillTree as an array of Skill
+		Skill[] _skillTree = skillData.skills;
 
-			// Pass the json to JsonUtility, and tell it to create a SkillTree object from it
-			SkillTree skillData = JsonUtility.FromJson<SkillTree>(dataAsJson);
-
-			// Store the SkillTree as an array of Skill
-			_skillTree = new Skill[skillData.skills.Length];
-			_skillTree = skillData.skills;
-
-			// Create nodes
-			for (int i = 0; i < _skillTree.Length; ++i) {
-				if (nodes == null) {
-					nodes = new List<Node>();
-				}
-
-				nodes.Add(new Node(_skillTree[i].position, 200, 100, nodeStyle, selectedNodeStyle, inPointStyle,
-				   outPointStyle, OnClickInPoint, OnClickOutPoint, OnClickRemoveNode,
-				   _skillTree[i].id, _skillTree[i].unlocked, _skillTree[i].name,
-				   _skillTree[i].dependencies));
-
-				if (_skillTree[i].dependencies.Length == 0) {
-					originNode.Add(_skillTree[i]);
-				}
+		// Create nodes
+		for (int i = 0; i < _skillTree.Length; ++i) {
+			if (nodes == null) {
+				nodes = new List<Node>();
 			}
-			MySkillTree.skills = _skillTree;
 
-			Node outNode;
-			// Create connections
-			for (int i = 0; i < nodes.Count; ++i) {
-				for (int j = 0; j < nodes[i].skill.dependencies.Length; ++j) {
-					for (int k = 0; k < nodes.Count; k++) {
+			nodes.Add(new Node(_skillTree[i].editor_position, 200, 100, nodeStyle, selectedNodeStyle, inPointStyle,
+			   outPointStyle, OnClickInPoint, OnClickOutPoint, OnClickRemoveNode,
+			   _skillTree[i].id, _skillTree[i].unlocked, _skillTree[i].name,
+			   _skillTree[i].dependencies));
+		}
 
-						if (nodes[i].skill.dependencies[j] == nodes[k].skill.id) {
-							outNode = nodes[k];
-							OnClickOutPoint(outNode.outPoint);
-							break;
-						}
+		Node outNode;
+		// Create connections
+		for (int i = 0; i < nodes.Count; ++i) {
+			for (int j = 0; j < nodes[i].skill.dependencies.Length; ++j) {
+				for (int k = 0; k < nodes.Count; k++) {
+
+					if (nodes[i].skill.dependencies[j] == nodes[k].skill.id) {
+						outNode = nodes[k];
+						OnClickOutPoint(outNode.outPoint);
+						break;
 					}
-					OnClickInPoint(nodes[i].inPoint);
 				}
+				OnClickInPoint(nodes[i].inPoint);
 			}
 		}
 	}
-	#endregion
 }
+#endregion

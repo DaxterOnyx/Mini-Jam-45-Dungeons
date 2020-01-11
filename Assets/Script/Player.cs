@@ -29,15 +29,8 @@ public class Player : Character
 		return (base.AttackSpeed() * Class.AttackSpeedRatio);
 	}
 
-	// Use this for initialization
-	void Start()
+	protected override bool IsFriend(Character character)
 	{
-
-	}
-
-	// Update is called once per frame
-	void Update()
-	{
-		
+		return character.CompareTag("Player");
 	}
 }

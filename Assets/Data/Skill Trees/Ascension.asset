@@ -14,23 +14,247 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skills:
   - id: 0
-    name: Life +
-    unlocked: 0
+    name: Town Tree
+    unlocked: 1
     cost: 0
     dependencies: 
-    description: add little more life
-    editor_position: {x: 123, y: 139}
+    description: 
+    editor_position: {x: 37, y: 101}
   - id: 1
-    name: Loot +
+    name: more crew
     unlocked: 0
     cost: 0
     dependencies: 00000000
-    description: get better loots
-    editor_position: {x: 494, y: 80}
+    description: 
+    editor_position: {x: 408, y: 42}
   - id: 2
-    name: XP +
+    name: life +
     unlocked: 0
     cost: 0
     dependencies: 00000000
-    description: get bonus experience
-    editor_position: {x: 493, y: 230}
+    description: 
+    editor_position: {x: 406, y: 143}
+  - id: 3
+    name: def +
+    unlocked: 0
+    cost: 0
+    dependencies: 00000000
+    description: 
+    editor_position: {x: 405, y: 233}
+  - id: 4
+    name: crit +
+    unlocked: 0
+    cost: 0
+    dependencies: 00000000
+    description: 
+    editor_position: {x: 404, y: 325}
+  - id: 5
+    name: regen
+    unlocked: 0
+    cost: 0
+    dependencies: 00000000
+    description: 
+    editor_position: {x: 403, y: 414}
+  - id: 6
+    name: life steal
+    unlocked: 0
+    cost: 0
+    dependencies: 00000000
+    description: 
+    editor_position: {x: 403, y: 510}
+  - id: 7
+    name: knock back
+    unlocked: 0
+    cost: 0
+    dependencies: 00000000
+    description: 
+    editor_position: {x: 402, y: 607}
+  - id: 8
+    name: benediction
+    unlocked: 0
+    cost: 0
+    dependencies: 00000000
+    description: 
+    editor_position: {x: 401, y: 701}
+  - id: 9
+    name: better armor
+    unlocked: 0
+    cost: 0
+    dependencies: 00000000
+    description: 
+    editor_position: {x: 402, y: 803}
+  - id: 10
+    name: knight
+    unlocked: 0
+    cost: 0
+    dependencies: 00000000
+    description: 
+    editor_position: {x: 703, y: 146}
+  - id: 11
+    name: mage
+    unlocked: 0
+    cost: 0
+    dependencies: 00000000
+    description: 
+    editor_position: {x: 707, y: 246}
+  - id: 12
+    name: healer
+    unlocked: 0
+    cost: 0
+    dependencies: 00000000
+    description: 
+    editor_position: {x: 706, y: 340}
+  - id: 13
+    name: archer
+    unlocked: 0
+    cost: 0
+    dependencies: 00000000
+    description: 
+    editor_position: {x: 705, y: 437}
+  - id: 14
+    name: assasin
+    unlocked: 0
+    cost: 0
+    dependencies: 00000000
+    description: 
+    editor_position: {x: 706, y: 532}
+  - id: 100
+    name: taunt
+    unlocked: 0
+    cost: 0
+    dependencies: 0a000000
+    description: 
+    editor_position: {x: 945, y: -82}
+  - id: 101
+    name: gather enemies
+    unlocked: 0
+    cost: 0
+    dependencies: 0a000000
+    description: 
+    editor_position: {x: 1160, y: -95}
+  - id: 102
+    name: life +
+    unlocked: 0
+    cost: 0
+    dependencies: 0a000000
+    description: 
+    editor_position: {x: 1376, y: -99}
+  - id: 103
+    name: def +
+    unlocked: 0
+    cost: 0
+    dependencies: 0a000000
+    description: 
+    editor_position: {x: 1578, y: -83}
+  - id: 104
+    name: mana +
+    unlocked: 0
+    cost: 0
+    dependencies: 0b000000
+    description: 
+    editor_position: {x: 1278, y: 67}
+  - id: 105
+    name: mana regen +
+    unlocked: 0
+    cost: 0
+    dependencies: 0b000000
+    description: 
+    editor_position: {x: 1503, y: 75}
+  - id: 106
+    name: sape
+    unlocked: 0
+    cost: 0
+    dependencies: 0b000000
+    description: 
+    editor_position: {x: 1713, y: 92}
+  - id: 107
+    name: mana steal
+    unlocked: 0
+    cost: 0
+    dependencies: 0b000000
+    description: 
+    editor_position: {x: 1926, y: 132}
+  - id: 108
+    name: heal +
+    unlocked: 0
+    cost: 0
+    dependencies: 0c000000
+    description: 
+    editor_position: {x: 1358, y: 253}
+  - id: 109
+    name: heal faster
+    unlocked: 0
+    cost: 0
+    dependencies: 0c000000
+    description: 
+    editor_position: {x: 1588, y: 272}
+  - id: 110
+    name: heal group
+    unlocked: 0
+    cost: 0
+    dependencies: 0c000000
+    description: 
+    editor_position: {x: 1807, y: 289}
+  - id: 111
+    name: self-heal
+    unlocked: 0
+    cost: 0
+    dependencies: 0c000000
+    description: 
+    editor_position: {x: 2027, y: 323}
+  - id: 112
+    name: range +
+    unlocked: 0
+    cost: 0
+    dependencies: 0d000000
+    description: 
+    editor_position: {x: 1187, y: 389}
+  - id: 213
+    name: speed +
+    unlocked: 0
+    cost: 0
+    dependencies: 0d000000
+    description: 
+    editor_position: {x: 1431, y: 418}
+  - id: 114
+    name: damage +
+    unlocked: 0
+    cost: 0
+    dependencies: 0b000000
+    description: 
+    editor_position: {x: 2152, y: 191}
+  - id: 115
+    name: node
+    unlocked: 0
+    cost: 0
+    dependencies: 0a000000
+    description: 
+    editor_position: {x: 1810, y: -72}
+  - id: 116
+    name: knock back
+    unlocked: 0
+    cost: 0
+    dependencies: 0d000000
+    description: 
+    editor_position: {x: 1667, y: 434}
+  - id: 117
+    name: magazine
+    unlocked: 0
+    cost: 0
+    dependencies: 0d000000
+    description: 
+    editor_position: {x: 1945, y: 437}
+  - id: 118
+    name: esquive +
+    unlocked: 0
+    cost: 0
+    dependencies: 0e000000
+    description: 
+    editor_position: {x: 1123, y: 517}
+  - id: 119
+    name: critic +
+    unlocked: 0
+    cost: 0
+    dependencies: 0e000000
+    description: 
+    editor_position: {x: 1371, y: 539}

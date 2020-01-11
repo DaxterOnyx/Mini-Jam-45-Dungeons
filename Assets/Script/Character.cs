@@ -5,6 +5,7 @@ public class Character : MonoBehaviour
 {
 	public CharacterData Data;
 	private Character Target;
+	public PopupManager popupManager;
 
 	public virtual float Speed()
 	{
@@ -38,6 +39,10 @@ public class Character : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
+		if (popupManager == null)
+			popupManager = GetComponentInChildren<PopupManager>();
+		if (popupManager == null)
+			Debug.LogError("Character not have PopupManager");
 		Initiate(Data);
 	}
 
@@ -52,6 +57,13 @@ public class Character : MonoBehaviour
 		if (Target == null)
 			return;
 
+		#region rotate
+		Vector3 diff = new Vector3(Target.transform.position.x, Target.transform.position.y, transform.position.z) - transform.position;
+		diff.Normalize();
+
+		float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
+		transform.DORotate(Quaternion.Euler(0f, 0f, rot_z - 90).eulerAngles, 0.1f);
+		#endregion
 
 		TargetDistance = Vector2.Distance(transform.position, Target.transform.position);
 		if (TargetDistance > Range()) {
@@ -63,11 +75,7 @@ public class Character : MonoBehaviour
 					ResearchTarget();
 		}
 
-		Vector3 diff = new Vector3(Target.transform.position.x, Target.transform.position.y, transform.position.z) - transform.position;
-		diff.Normalize();
 
-		float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
-		transform.DORotate(Quaternion.Euler(0f, 0f, rot_z - 90).eulerAngles, 0.1f);
 	}
 
 	private void ResearchTarget()
@@ -83,6 +91,7 @@ public class Character : MonoBehaviour
 		var dist = float.MaxValue;
 		for (int i = 0; i < characters.Length; i++) {
 			if (characters[i] == this) continue;
+			if (IsFriend(characters[i])) continue;
 
 			var d = Vector2.Distance(characters[i].transform.position, transform.position);
 			if (d < dist) {
@@ -91,8 +100,13 @@ public class Character : MonoBehaviour
 			}
 		}
 
-			Target = characters[targetId];
+		Target = characters[targetId];
 
+	}
+
+	protected virtual bool IsFriend(Character character)
+	{
+		return character.CompareTag("Ennemy");
 	}
 
 	public bool Attack(Character target)
@@ -111,6 +125,9 @@ public class Character : MonoBehaviour
 
 	private bool Hit(int damage)
 	{
+		//TODO DODGE
+		//TODO ARMOR
+		popupManager.PopupValue(damage.ToString(), PopupData.Style.DAMAGE);
 		HP -= damage;
 		if (HP <= 0) {
 			Die();

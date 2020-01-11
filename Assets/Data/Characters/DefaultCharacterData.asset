@@ -12,13 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 853928b82f6bbc94b80f32ecdce6990f, type: 3}
   m_Name: DefaultCharacterData
   m_EditorClassIdentifier: 
-  DefaultHPAmount: 100
-  DefaultArmorAmount: 10
-  DefaultSpeedAmount: 1
-  DefaultCriticAmount: 1
-  DefaultDodgeAmount: 1
-  DefaultPhysicDommageAmount: 5
-  DefaultRangeAmount: 1
-  DefaultAttackSpeedAmount: 1
-  DefaultArmorPenetrationAmount: 25
-  DefaultManaAmount: 100
+  PopupManager: {fileID: 6941897680994976148, guid: 8cd8ea084e266dd4095bee0c9f181aca,
+    type: 3}
+  HPAmount: 50
+  ArmorAmount: 10
+  SpeedAmount: 1
+  CriticAmount: 1
+  CriticRange: 1
+  DodgeAmount: 1
+  PhysicDommageAmount: 5
+  RangeAmount: 0.4
+  AttackSpeedAmount: 1
+  ArmorPenetrationAmount: 25
+  ManaAmount: 100

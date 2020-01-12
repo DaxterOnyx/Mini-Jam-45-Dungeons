@@ -3,8 +3,6 @@
 [CreateAssetMenu(fileName = "New CharacterData", menuName = "Data/CharacterData")]
 public class CharacterData : ScriptableObject
 {
-	public PopupManager PopupManager;
-
 	public int HPAmount = 100;
 	public int ArmorAmount = 10;
 	public float SpeedAmount = 1;

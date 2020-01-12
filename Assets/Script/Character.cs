@@ -5,7 +5,12 @@ public class Character : MonoBehaviour
 {
 	public CharacterData Data;
 	private Character Target;
-	public PopupManager popupManager;
+	[SerializeField]
+	private PopupManager popupManager;
+	[SerializeField]
+	private Animator animator;
+	[SerializeField]
+	protected Transform SpawnPoint;
 
 	public virtual float Speed()
 	{
@@ -17,9 +22,17 @@ public class Character : MonoBehaviour
 		return Data.HPAmount;
 	}
 
-	public virtual int Dammage()
+	public virtual Damage DamageValue()
 	{
-		return Data.PhysicDommageAmount;
+		return new Damage(false, Data.PhysicDommageAmount, 0f, false, "Ennemy");
+	}
+
+	public virtual Damage DamageValue(ref GameObject gameObject)
+	{
+		var value = DamageValue();
+		var dam = Damage.GetComponent(value.isCritic, value.value, value.pourcentPenetration, value.isRegen, value.targetTag, ref gameObject);
+
+		return dam;
 	}
 
 	public virtual float Range()
@@ -43,7 +56,12 @@ public class Character : MonoBehaviour
 			popupManager = GetComponentInChildren<PopupManager>();
 		if (popupManager == null)
 			Debug.LogError("Character not have PopupManager");
-		Initiate(Data);
+		Initiate();
+	}
+
+	internal bool Survive(Damage dam)
+	{
+		return HP - dam.value > 0;
 	}
 
 
@@ -54,8 +72,10 @@ public class Character : MonoBehaviour
 
 		if (Target == null)
 			ResearchTarget();
-		if (Target == null)
+		if (Target == null) {
+			transform.DOKill();
 			return;
+		}
 
 		#region rotate
 		Vector3 diff = new Vector3(Target.transform.position.x, Target.transform.position.y, transform.position.z) - transform.position;
@@ -80,7 +100,7 @@ public class Character : MonoBehaviour
 
 	private void ResearchTarget()
 	{
-		var characters = FindObjectsOfType<Character>();
+		var characters = CharactersManager.Instance.GetCharacters();
 
 		if (characters.Length == 1) {
 			Debug.Log("I'm alone.");
@@ -100,6 +120,11 @@ public class Character : MonoBehaviour
 			}
 		}
 
+		if (targetId == -1) {
+			Debug.Log("I win.");
+			return;
+		}
+
 		Target = characters[targetId];
 
 	}
@@ -112,33 +137,48 @@ public class Character : MonoBehaviour
 	public bool Attack(Character target)
 	{
 		cooldownAttack = 1 / AttackSpeed();
+
+		animator.SetTrigger("Attack");
+
 		//TODO Critik
 		//TODO MAGIC DAMAGE
-		return target.Hit(Dammage());
+		Debug.Log("I'm hiting. " + gameObject.name + "->" + Target.name);
+
+		return Hit(target);
 	}
 
-	internal void Initiate(CharacterData data)
+	protected virtual bool Hit(Character target)
 	{
-		Data = data;
+		return target.DoDamage(DamageValue());
+	}
+
+	internal void Initiate()
+	{
 		HP = MaxHP();
 	}
 
-	private bool Hit(int damage)
+	public bool DoDamage(Damage damage)
 	{
+		Debug.Log("I'm hited. " + gameObject.name + "<-" + Target.name);
 		//TODO DODGE
 		//TODO ARMOR
-		popupManager.PopupValue(damage.ToString(), PopupData.Style.DAMAGE);
-		HP -= damage;
+		popupManager.PopupValue(damage.value.ToString(), damage.isRegen ? PopupData.Style.HEAL : damage.pourcentPenetration > 0 ? PopupData.Style.MAGIC : damage.isCritic ? PopupData.Style.CRITIC : PopupData.Style.DAMAGE);
+		HP += (damage.isRegen ? 1 : -1) * damage.value;
 		if (HP <= 0) {
 			Die();
-			return true;
 		}
-		return false;
+		int max = MaxHP();
+		if (HP > max)
+			HP = max;
+		var b = damage.isRegen ? HP == max : HP <= 0;
+		return b;
 	}
 
 	private void Die()
 	{
-		Destroy(gameObject);
+		Debug.Log("I'm dying. " + gameObject.name);
+		animator.SetBool("Dead", true);
+		Destroy(gameObject, 0.1f);
 	}
 
 	public void DefineTarget(Character character)

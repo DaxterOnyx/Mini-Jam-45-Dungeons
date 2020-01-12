@@ -15,5 +15,8 @@ public class ClassData: ScriptableObject
 	public float AttackSpeedRatio = 1;
 	public float ArmorPenetrationRatio = 1;
 	public float ManaRatio = 1;
+	[Header("Projectile")]
+	public bool LaunchProjectile = false;
+	public GameObject Projectile;
 	//TODO HEALER SPEC
 }

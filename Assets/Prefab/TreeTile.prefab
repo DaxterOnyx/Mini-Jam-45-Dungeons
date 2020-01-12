@@ -348,7 +348,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 9107171699614425857}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 546622392947049624}
+        m_MethodName: Click
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &546622392947049624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -364,6 +375,9 @@ MonoBehaviour:
   title: {fileID: 4483687669346662062}
   descripion: {fileID: 6641397144150408118}
   cost: {fileID: 3379075253972413264}
+  id: 0
+  skillTree: {fileID: 0}
+  button: {fileID: 1858015457428016570}
 --- !u!1 &6267776600682062215
 GameObject:
   m_ObjectHideFlags: 0

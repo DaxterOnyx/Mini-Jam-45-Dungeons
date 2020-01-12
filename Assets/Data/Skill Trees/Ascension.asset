@@ -23,117 +23,117 @@ MonoBehaviour:
   - id: 1
     name: more crew
     unlocked: 0
-    cost: 0
+    cost: 1
     dependencies: 00000000
     description: 
     editor_position: {x: 408, y: 42}
   - id: 2
     name: life +
     unlocked: 0
-    cost: 0
+    cost: 5
     dependencies: 00000000
     description: 
     editor_position: {x: 406, y: 143}
   - id: 3
     name: def +
     unlocked: 0
-    cost: 0
+    cost: 5
     dependencies: 00000000
     description: 
     editor_position: {x: 405, y: 233}
   - id: 4
     name: crit +
     unlocked: 0
-    cost: 0
+    cost: 15
     dependencies: 00000000
     description: 
     editor_position: {x: 404, y: 325}
   - id: 5
     name: regen
     unlocked: 0
-    cost: 0
+    cost: 20
     dependencies: 00000000
     description: 
     editor_position: {x: 403, y: 414}
   - id: 6
     name: life steal
     unlocked: 0
-    cost: 0
+    cost: 40
     dependencies: 00000000
     description: 
     editor_position: {x: 403, y: 510}
   - id: 7
     name: knock back
     unlocked: 0
-    cost: 0
+    cost: 20
     dependencies: 00000000
     description: 
     editor_position: {x: 402, y: 607}
   - id: 8
     name: benediction
     unlocked: 0
-    cost: 0
+    cost: 40
     dependencies: 00000000
     description: 
     editor_position: {x: 401, y: 701}
   - id: 9
     name: better armor
     unlocked: 0
-    cost: 0
+    cost: 10
     dependencies: 00000000
     description: 
     editor_position: {x: 402, y: 803}
   - id: 10
     name: knight
     unlocked: 0
-    cost: 0
+    cost: 5
     dependencies: 00000000
     description: 
     editor_position: {x: 703, y: 146}
   - id: 11
     name: mage
     unlocked: 0
-    cost: 0
+    cost: 10
     dependencies: 00000000
     description: 
     editor_position: {x: 707, y: 246}
   - id: 12
     name: healer
     unlocked: 0
-    cost: 0
+    cost: 10
     dependencies: 00000000
     description: 
     editor_position: {x: 706, y: 340}
   - id: 13
     name: archer
     unlocked: 0
-    cost: 0
+    cost: 5
     dependencies: 00000000
     description: 
     editor_position: {x: 705, y: 437}
   - id: 14
     name: assasin
     unlocked: 0
-    cost: 0
+    cost: 10
     dependencies: 00000000
     description: 
     editor_position: {x: 706, y: 532}
   - id: 100
-    name: taunt
+    name: more crew
     unlocked: 0
     cost: 0
     dependencies: 0a000000
     description: 
     editor_position: {x: 945, y: -82}
   - id: 101
-    name: gather enemies
+    name: 
     unlocked: 0
     cost: 0
     dependencies: 0a000000
     description: 
     editor_position: {x: 1160, y: -95}
   - id: 102
-    name: life +
+    name: 
     unlocked: 0
     cost: 0
     dependencies: 0a000000

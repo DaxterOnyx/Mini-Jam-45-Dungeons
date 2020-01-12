@@ -15,8 +15,7 @@ public class CharactersManager : MonoBehaviour
 
 	public int MaxCharactersNb = 100;
 	public Rect AreaToSpawn = new Rect(0, 0, 10, 10);
-	public GameObject EnnemyPrefab;
-	public CharacterData[] EnnemysData;
+	public GameObject[] Ennemys;
 
 	public Character[] SpawnEnnemmiesGroup(int PowerValue)
 	{
@@ -34,11 +33,11 @@ public class CharactersManager : MonoBehaviour
 	{
 		//TODO SELECT GOOD POWER VALUE
 		var min = 0;
-		var max = EnnemysData.Length;
-		var data = EnnemysData[Random.Range(min, max)];
-		var ennemy = Instantiate(EnnemyPrefab,transform).GetComponent<Character>();
+		var max = Ennemys.Length;
+		var data = Ennemys[Random.Range(min, max)];
+		var ennemy = Instantiate(data,transform).GetComponent<Character>();
 		ennemy.transform.position = RandomPosition();
-		ennemy.Initiate(data);
+		ennemy.Initiate();
 		return ennemy;
 	}
 
@@ -49,6 +48,13 @@ public class CharactersManager : MonoBehaviour
 
 	private void Start()
 	{
+		//TODO POWER LEVEL BY Wave
 		SpawnEnnemmiesGroup(100);
+	}
+
+	internal Character[] GetCharacters()
+	{
+		//TODO Set in Cache
+		return GetComponentsInChildren<Character>();
 	}
 }

@@ -24,3 +24,6 @@ MonoBehaviour:
   AttackSpeedRatio: 0.5
   ArmorPenetrationRatio: 0
   ManaRatio: 0
+  LaunchProjectile: 1
+  Projectile: {fileID: 3858381999835268435, guid: 9c2036e66eb4df248ba1899a071fcf42,
+    type: 3}

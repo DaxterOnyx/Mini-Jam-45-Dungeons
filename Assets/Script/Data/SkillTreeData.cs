@@ -43,7 +43,7 @@ public class SkillTreeData : ScriptableObject
 			var dependencies = new Skill[skill.dependencies.Length];
 			for (int i = 0; i < skill.dependencies.Length; i++) {
 
-				var dep = GetSkill(i);
+				var dep = GetSkill(skill.dependencies[i]);
 				if (dep.id != -1)
 					dependencies[i] = dep;
 				else // If one of the dependencies doesn't exist.

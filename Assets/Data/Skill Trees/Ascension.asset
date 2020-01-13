@@ -122,21 +122,21 @@ MonoBehaviour:
     name: more crew
     unlocked: 0
     cost: 0
-    dependencies: 0a000000
-    description: 
+    dependencies: 01000000
+    description: Bigger Team
     editor_position: {x: 945, y: -82}
   - id: 101
-    name: 
+    name: life ++
     unlocked: 0
     cost: 0
-    dependencies: 0a000000
+    dependencies: 02000000
     description: 
     editor_position: {x: 1160, y: -95}
   - id: 102
-    name: 
+    name: def ++
     unlocked: 0
     cost: 0
-    dependencies: 0a000000
+    dependencies: 03000000
     description: 
     editor_position: {x: 1376, y: -99}
   - id: 103

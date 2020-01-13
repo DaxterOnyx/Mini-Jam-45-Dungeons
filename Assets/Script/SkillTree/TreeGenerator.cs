@@ -8,12 +8,17 @@ public class TreeGenerator : MonoBehaviour
 {
     public GameObject treeTile;
     public RectTransform container;
+    public Text gemText;
+
+    private List<TreeTileScript> tileList;
+    private SkillTree skillTree;
 
     // Start is called before the first frame update
     void Start()
     {
         //newTile.SetActive(false);
-        var skillTree = GetComponent<SkillTree>();
+        tileList = new List<TreeTileScript>();
+        skillTree = GetComponent<SkillTree>();
         container.anchoredPosition = Vector2.zero; //localPosition = Vector3.zero;
         container.sizeDelta = new Vector2(
             0, // X
@@ -26,7 +31,7 @@ public class TreeGenerator : MonoBehaviour
         }
         Array.Sort(ids);
         int[] bases = Array.FindAll(ids, c => c<100 );
-        int[] firstlevel = Array.FindAll(ids, c => c > 100 && c < 200);
+        int[] firstlevel = Array.FindAll(ids, c => c >= 100 && c < 200);
 
         int[][] levels = { bases, firstlevel };
         // l'arbre est plein (sans interval entre les Id et ID 0 est la racine
@@ -57,7 +62,10 @@ public class TreeGenerator : MonoBehaviour
                     skill.cost.ToString(),
                     skillTree,
                     i[j],
-                    skillTree.CanSkillBeUnlocked(i[j]));
+                    skillTree.CanSkillBeUnlocked(i[j]),
+                    gemText,
+                    this);
+                tileList.Add(newTile);
             }
             gapCounter++;
             rawCounter++;
@@ -65,6 +73,19 @@ public class TreeGenerator : MonoBehaviour
 
     }
 
+    public void updateTree(int idSkill)
+    {
+        // var rootTile = tileList.Find(t => t.id == idSkill);
+        //var dependecies = skillTree.Data.skills[idSkill].dependencies;
+        foreach (Skill skill in skillTree.Data.skills)
+        {
+            var founded = Array.Find(skill.dependencies, d => d == idSkill);
+            if (founded != 0)
+            {
+                tileList.Find(t => t.id == skill.id)?.setInteractable();
+            }
+        }
+    }
     // Update is called once per frame
     //void Update()
     //{

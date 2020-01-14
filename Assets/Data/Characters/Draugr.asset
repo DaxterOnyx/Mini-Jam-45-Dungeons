@@ -12,14 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 853928b82f6bbc94b80f32ecdce6990f, type: 3}
   m_Name: Draugr
   m_EditorClassIdentifier: 
+  EnnemyTag: Player
   HPAmount: 100
-  ArmorAmount: 10
+  ArmorAmount: 0
   SpeedAmount: 1
-  CriticAmount: 1
-  CriticRange: 1
-  DodgeAmount: 1
+  CriticMultiplier: 2
+  CriticPourcentProba: 1
+  DodgeProba: 1
   PhysicDommageAmount: 5
   RangeAmount: 1
-  AttackSpeedAmount: 1
-  ArmorPenetrationAmount: 25
+  AttackSpeed: 1
+  KnockBackResist: 0
+  KnonkBackImpact: 1
+  ArmorPenetrationPourcentage: 0
   ManaAmount: 100

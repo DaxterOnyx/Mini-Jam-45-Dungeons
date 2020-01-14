@@ -150,7 +150,8 @@ MonoBehaviour:
   Data: {fileID: 11400000, guid: 0bb4672f5eaa6ac4d8fa023c13d93d93, type: 2}
   popupManager: {fileID: 6499393198712584760}
   animator: {fileID: 120998431943100158}
-  Class: {fileID: 11400000, guid: 9f1cfc42e6af7204795528640637796b, type: 2}
+  SpawnPoint: {fileID: 0}
+  Class: {fileID: 11400000, guid: f28386a1e9a1f6f40b03429042657181, type: 2}
 --- !u!50 &-5687400275563308443
 Rigidbody2D:
   serializedVersion: 4
@@ -159,7 +160,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7633746992733016514}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0

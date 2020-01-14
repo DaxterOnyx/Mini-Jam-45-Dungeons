@@ -14,17 +14,19 @@ public class CharactersManager : MonoBehaviour
 	}
 
 	public int MaxCharactersNb = 100;
-	public Rect AreaToSpawn = new Rect(0, 0, 10, 10);
+	public Rect AreaToSpawn = new Rect(0, -5, 8, 10);
+	public Rect AreaToFight = new Rect(-8, -5, 16, 10);
 	public GameObject[] Ennemys;
+
 
 	public Character[] SpawnEnnemmiesGroup(int PowerValue)
 	{
-		var nb = Random.Range(1, Mathf.Min(MaxCharactersNb,PowerValue));
+		var nb = Random.Range(1, Mathf.Min(MaxCharactersNb, PowerValue));
 		var characters = new Character[nb];
 
 		for (int i = 0; i < nb; i++) {
 			characters[i] = SpawnEnnemy(PowerValue / nb);
-				}
+		}
 
 		return characters;
 	}
@@ -35,7 +37,7 @@ public class CharactersManager : MonoBehaviour
 		var min = 0;
 		var max = Ennemys.Length;
 		var data = Ennemys[Random.Range(min, max)];
-		var ennemy = Instantiate(data,transform).GetComponent<Character>();
+		var ennemy = Instantiate(data, transform).GetComponent<Character>();
 		ennemy.transform.position = RandomPosition();
 		ennemy.Initiate();
 		return ennemy;
@@ -54,7 +56,7 @@ public class CharactersManager : MonoBehaviour
 
 	internal Character[] GetCharacters()
 	{
-		//TODO Set in Cache
+		//TODO Set in Cache character list
 		return GetComponentsInChildren<Character>();
 	}
 }

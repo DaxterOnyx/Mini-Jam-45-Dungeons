@@ -13,98 +13,98 @@ MonoBehaviour:
   m_Name: Ascension
   m_EditorClassIdentifier: 
   skills:
-  - id: 0
+  - id: 1
     name: more crew
     unlocked: 0
     cost: 0
     dependencies: 
-    description: 
+    description: you need more warriors
     editor_position: {x: 0, y: 0}
-  - id: 1
+  - id: 2
     name: life +
     unlocked: 0
     cost: 0
     dependencies: 
     description: 
     editor_position: {x: 0, y: 0}
-  - id: 2
+  - id: 3
     name: def +
     unlocked: 0
     cost: 0
     dependencies: 
     description: 
     editor_position: {x: 0, y: 0}
-  - id: 3
+  - id: 4
     name: crit +
     unlocked: 0
     cost: 0
     dependencies: 
     description: 
     editor_position: {x: 0, y: 0}
-  - id: 4
+  - id: 5
     name: regen
     unlocked: 0
     cost: 0
     dependencies: 
     description: 
     editor_position: {x: 0, y: 0}
-  - id: 5
+  - id: 6
     name: life steal
     unlocked: 0
     cost: 0
     dependencies: 
     description: 
     editor_position: {x: 0, y: 0}
-  - id: 6
+  - id: 7
     name: knock back
     unlocked: 0
     cost: 0
     dependencies: 
     description: 
     editor_position: {x: 0, y: 0}
-  - id: 7
+  - id: 8
     name: benediction
     unlocked: 0
     cost: 0
     dependencies: 
     description: 
     editor_position: {x: 0, y: 0}
-  - id: 8
+  - id: 9
     name: better armor
     unlocked: 0
     cost: 0
     dependencies: 
     description: 
     editor_position: {x: 0, y: 0}
-  - id: 9
+  - id: 10
     name: knight
     unlocked: 0
     cost: 0
     dependencies: 
     description: 
     editor_position: {x: 0, y: 0}
-  - id: 10
+  - id: 11
     name: mage
     unlocked: 0
     cost: 0
     dependencies: 
     description: 
     editor_position: {x: 0, y: 0}
-  - id: 11
+  - id: 12
     name: healer
     unlocked: 0
     cost: 0
     dependencies: 
     description: 
     editor_position: {x: 0, y: 0}
-  - id: 12
+  - id: 13
     name: archer
     unlocked: 0
     cost: 0
     dependencies: 
     description: 
     editor_position: {x: 0, y: 0}
-  - id: 13
+  - id: 14
     name: assasin
     unlocked: 0
     cost: 0
@@ -115,140 +115,140 @@ MonoBehaviour:
     name: more crew
     unlocked: 0
     cost: 0
-    dependencies: 00000000
+    dependencies: 01000000
     description: 
     editor_position: {x: 0, y: 0}
   - id: 115
     name: life ++
     unlocked: 0
     cost: 0
-    dependencies: 01000000
+    dependencies: 02000000
     description: 
     editor_position: {x: 0, y: 0}
   - id: 116
     name: def ++
     unlocked: 0
     cost: 0
-    dependencies: 02000000
+    dependencies: 03000000
     description: 
     editor_position: {x: 0, y: 0}
   - id: 117
     name: def +
     unlocked: 0
     cost: 0
-    dependencies: 09000000
+    dependencies: 0a000000
     description: 
     editor_position: {x: 0, y: 0}
   - id: 118
     name: mana +
     unlocked: 0
     cost: 0
-    dependencies: 0a000000
+    dependencies: 0b000000
     description: 
     editor_position: {x: 0, y: 0}
   - id: 119
     name: mana regen +
     unlocked: 0
     cost: 0
-    dependencies: 0a000000
+    dependencies: 0b000000
     description: 
     editor_position: {x: 0, y: 0}
   - id: 120
     name: sape
     unlocked: 0
     cost: 0
-    dependencies: 0a000000
+    dependencies: 0b000000
     description: 
     editor_position: {x: 0, y: 0}
   - id: 121
     name: mana steal
     unlocked: 0
     cost: 0
-    dependencies: 0a000000
+    dependencies: 0b000000
     description: 
     editor_position: {x: 0, y: 0}
   - id: 122
     name: heal +
     unlocked: 0
     cost: 0
-    dependencies: 0b000000
+    dependencies: 0c000000
     description: 
     editor_position: {x: 0, y: 0}
   - id: 123
     name: heal faster
     unlocked: 0
     cost: 0
-    dependencies: 0b000000
+    dependencies: 0c000000
     description: 
     editor_position: {x: 0, y: 0}
   - id: 124
     name: heal group
     unlocked: 0
     cost: 0
-    dependencies: 0b000000
+    dependencies: 0c000000
     description: 
     editor_position: {x: 0, y: 0}
   - id: 125
     name: self-heal
     unlocked: 0
     cost: 0
-    dependencies: 0b000000
+    dependencies: 0c000000
     description: 
     editor_position: {x: 0, y: 0}
   - id: 126
     name: range +
     unlocked: 0
     cost: 0
-    dependencies: 0c000000
+    dependencies: 0d000000
     description: 
     editor_position: {x: 0, y: 0}
   - id: 127
     name: speed +
     unlocked: 0
     cost: 0
-    dependencies: 0c000000
+    dependencies: 0d000000
     description: 
     editor_position: {x: 0, y: 0}
   - id: 128
     name: damage +
     unlocked: 0
     cost: 0
-    dependencies: 0a000000
+    dependencies: 0b000000
     description: 
     editor_position: {x: 0, y: 0}
   - id: 129
     name: node
     unlocked: 0
     cost: 0
-    dependencies: 09000000
+    dependencies: 0a000000
     description: 
     editor_position: {x: 0, y: 0}
   - id: 130
     name: knock back
     unlocked: 0
     cost: 0
-    dependencies: 0c000000
+    dependencies: 0d000000
     description: 
     editor_position: {x: 0, y: 0}
   - id: 131
     name: magazine
     unlocked: 0
     cost: 0
-    dependencies: 0c000000
+    dependencies: 0d000000
     description: 
     editor_position: {x: 0, y: 0}
   - id: 132
     name: esquive +
     unlocked: 0
     cost: 0
-    dependencies: 0d000000
+    dependencies: 0e000000
     description: 
     editor_position: {x: 0, y: 0}
   - id: 133
     name: critic +
     unlocked: 0
     cost: 0
-    dependencies: 0d000000
+    dependencies: 0e000000
     description: 
     editor_position: {x: 0, y: 0}
   - id: 234

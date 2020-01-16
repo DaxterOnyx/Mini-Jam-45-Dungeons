@@ -388,7 +388,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.5003662, y: 7.269348}
+  m_AnchoredPosition: {x: -0.5003662, y: 233.88}
   m_SizeDelta: {x: 1, y: 760.4}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &928056415
@@ -700,6 +700,7 @@ MonoBehaviour:
   tileContainer: {fileID: 697796352}
   brancheContainer: {fileID: 402508370}
   gemText: {fileID: 2005257956}
+  skillTree: {fileID: 1301932398}
 --- !u!114 &1301932398
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -745,6 +746,7 @@ MonoBehaviour:
   tileContainer: {fileID: 697796352}
   brancheContainer: {fileID: 402508370}
   gemText: {fileID: 2005257956}
+  skillTree: {fileID: 0}
 --- !u!1 &1686797848
 GameObject:
   m_ObjectHideFlags: 0
@@ -1013,8 +1015,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 277695512}
   m_HandleRect: {fileID: 277695511}
   m_Direction: 2
-  m_Value: 0.9635439
-  m_Size: 0.73776954
+  m_Value: -0.17291863
+  m_Size: 0.58179307
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

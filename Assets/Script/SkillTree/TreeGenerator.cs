@@ -12,8 +12,8 @@ public class TreeGenerator : MonoBehaviour
     public RectTransform brancheContainer;
     public Text gemText;
 
-    private List<TreeTileScript> tileList;
-    private SkillTree skillTree;
+    internal List<TreeTileScript> tileList;
+    internal SkillTree skillTree;
 
     // Start is called before the first frame update
     void Start()
@@ -95,7 +95,7 @@ public class TreeGenerator : MonoBehaviour
                         Quaternion.AngleAxis(- rotation, Vector3.back),
                         brancheContainer.transform).GetComponent<RectTransform>();
                     beamRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, Vector2.Distance(positionRoot, position));
-                    Debug.Log("beam of " + newTile.id + " from " + position.ToString() + " to " + positionBeam.ToString() + " with rotation: " + rotation);
+                    //Debug.Log("beam of " + newTile.id + " from " + position.ToString() + " to " + positionBeam.ToString() + " with rotation: " + rotation);
                 }
             }
             gapCounter++;
@@ -110,7 +110,7 @@ public class TreeGenerator : MonoBehaviour
         //var dependecies = skillTree.Data.skills[idSkill].dependencies;
         foreach (Skill skill in skillTree.Data.skills)
         {
-            int founded = Array.Find(skill.dependencies, d => d.ToString() == idSkill.ToString());
+            int founded = Array.Find(skill.dependencies, d => d == idSkill);
             if (founded != 0)
             {
                 tileList.Find(t => t.id == skill.id)?.setInteractable();

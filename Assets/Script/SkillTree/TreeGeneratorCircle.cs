@@ -12,8 +12,8 @@ public class TreeGeneratorCircle : TreeGenerator {
     //public RectTransform brancheContainer;
     //public Text gemText;
 
-    private List<TreeTileScript> tileList;
-    private SkillTree skillTree;
+    //private List<TreeTileScript> tileList;
+    //private SkillTree skillTree;
 
     // Start is called before the first frame update
     void Start() {
@@ -94,7 +94,7 @@ public class TreeGeneratorCircle : TreeGenerator {
                         Quaternion.AngleAxis(- rotation, Vector3.back),
                         brancheContainer.transform).GetComponent<RectTransform>();
                     beamRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, Vector2.Distance(positionRoot, position));
-                    Debug.Log("beam of " + newTile.id + " from " + position.ToString() + " to " + positionBeam.ToString() + " with rotation: " + rotation);
+                    //Debug.Log("beam of " + newTile.id + " from " + position.ToString() + " to " + positionBeam.ToString() + " with rotation: " + rotation);
                 }
             }
             radiusCircle += 160;

@@ -10,17 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 853928b82f6bbc94b80f32ecdce6990f, type: 3}
-  m_Name: PlayerData
+  m_Name: Human
   m_EditorClassIdentifier: 
-  PopupManager: {fileID: 0}
+  EnnemyTag: Ennemy
   HPAmount: 100
-  ArmorAmount: 10
+  ArmorAmount: 1
   SpeedAmount: 1
-  CriticAmount: 1
-  CriticRange: 1
-  DodgeAmount: 1
-  PhysicDommageAmount: 5
+  CriticMultiplier: 2
+  CriticPourcentProba: 1
+  DodgeProba: 1
+  PhysicDommageAmount: 10
   RangeAmount: 1
-  AttackSpeedAmount: 1
-  ArmorPenetrationAmount: 25
+  AttackSpeed: 1
+  KnockBackResist: 0
+  KnonkBackImpact: 1
+  ArmorPenetrationPourcentage: 0
   ManaAmount: 100

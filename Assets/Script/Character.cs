@@ -1,4 +1,6 @@
 ﻿using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 using UnityEngine;
 
 public class Character : MonoBehaviour
@@ -12,42 +14,57 @@ public class Character : MonoBehaviour
 	[SerializeField]
 	protected Transform SpawnPoint;
 
-	public virtual float Speed()
+	public virtual float Speed => Data.SpeedAmount;
+
+	public virtual int MaxHP => Data.HPAmount;
+
+	public virtual Damage DamageValue
 	{
-		return Data.SpeedAmount;
+		get {
+			int proba = CriticRatio;
+			bool isCrit = (Random.Range(0, 100) < proba);
+
+			int value = Data.PhysicDommageAmount;
+			if (isCrit)
+				value *= CriticMultiplier;
+
+
+			return new Damage(isCrit, value, Penetration, false, Target);
+		}
 	}
 
-	public virtual int MaxHP()
-	{
-		return Data.HPAmount;
-	}
+	public virtual int CriticRatio => Data.CriticPourcentProba;
 
-	public virtual Damage DamageValue()
-	{
-		return new Damage(false, Data.PhysicDommageAmount, 0f, false, "Ennemy");
-	}
+	public virtual int CriticMultiplier => Data.CriticMultiplier;
 
-	public virtual Damage DamageValue(ref GameObject gameObject)
+	public virtual Damage DefineDamageComponent(ref GameObject gameObject)
 	{
-		var value = DamageValue();
-		var dam = Damage.GetComponent(value.isCritic, value.value, value.pourcentPenetration, value.isRegen, value.targetTag, ref gameObject);
+		var value = DamageValue;
+		var dam = Damage.GetComponent(value.isCritic, value.value, value.pourcentPenetration, value.isRegen, value.target, ref gameObject);
 
 		return dam;
 	}
 
-	public virtual float Range()
-	{
-		return Data.RangeAmount;
-	}
+	public virtual float Range => Data.RangeAmount;
 
-	public virtual float AttackSpeed()
-	{
-		return Data.AttackSpeedAmount;
-	}
+	public virtual float AttackSpeed => Data.AttackSpeed;
 
-	private int HP;
+	public virtual int Armor => Data.ArmorAmount;
+
+	public virtual int Penetration => Data.ArmorPenetrationPourcentage;
+
+	public virtual int DodgeRatio => Data.DodgeProba;
+
+	public virtual float KnockBackResist => Data.KnockBackResist;
+
+	public string TargetTag => Target.tag;
+
+	internal int HP { get; private set; }
+	public bool Living { get { return HP > 0; } }
+
 	private float TargetDistance;
 	private float cooldownAttack;
+	private TweenerCore<Quaternion, Vector3, QuaternionOptions> tweenRotate;
 
 	// Start is called before the first frame update
 	void Start()
@@ -78,24 +95,46 @@ public class Character : MonoBehaviour
 		}
 
 		#region rotate
-		Vector3 diff = new Vector3(Target.transform.position.x, Target.transform.position.y, transform.position.z) - transform.position;
-		diff.Normalize();
-
-		float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
-		transform.DORotate(Quaternion.Euler(0f, 0f, rot_z - 90).eulerAngles, 0.1f);
+		LookAt(Target.transform.position);
 		#endregion
 
 		TargetDistance = Vector2.Distance(transform.position, Target.transform.position);
-		if (TargetDistance > Range()) {
-			DefineAim(Target.transform.position);
+		if (TargetDistance > Range) {
+			MoveTo();
 		} else {
-			transform.DOMove(transform.position, 0);
 			if (cooldownAttack <= 0)
 				if (Attack(Target))
 					ResearchTarget();
 		}
 
 
+	}
+
+	private void LateUpdate()
+	{
+		var newpos = transform.position;
+		Rect areaToFight = CharactersManager.Instance.AreaToFight;
+		if (!areaToFight.Contains((Vector2)transform.position)) {
+
+			if (transform.position.x < areaToFight.x)
+				newpos.x = areaToFight.x;
+			if (transform.position.x > areaToFight.xMax)
+				newpos.x = areaToFight.xMax;
+			if (transform.position.y < areaToFight.y)
+				newpos.y = areaToFight.y;
+			if (transform.position.x > areaToFight.xMax)
+				newpos.y = areaToFight.yMax;
+			transform.position = newpos;
+		}
+	}
+
+	private void LookAt(Vector2 position)
+	{
+		Vector3 diff = new Vector3(position.x, position.y, transform.position.z) - transform.position;
+		diff.Normalize();
+
+		float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
+		tweenRotate = transform.DORotate(Quaternion.Euler(0f, 0f, rot_z - 90).eulerAngles, 0.1f);
 	}
 
 	private void ResearchTarget()
@@ -106,7 +145,20 @@ public class Character : MonoBehaviour
 			Debug.Log("I'm alone.");
 			return;
 		}
+		int targetId = SelectTarget(characters);
 
+		if (targetId == -1) {
+			Debug.Log("I win.");
+			Target = null;
+			return;
+		}
+
+		DefineTarget(characters[targetId]);
+
+	}
+
+	protected virtual int SelectTarget(Character[] characters)
+	{
 		var targetId = -1;
 		var dist = float.MaxValue;
 		for (int i = 0; i < characters.Length; i++) {
@@ -120,28 +172,20 @@ public class Character : MonoBehaviour
 			}
 		}
 
-		if (targetId == -1) {
-			Debug.Log("I win.");
-			return;
-		}
-
-		Target = characters[targetId];
-
+		return targetId;
 	}
 
-	protected virtual bool IsFriend(Character character)
+	protected bool IsFriend(Character character)
 	{
-		return character.CompareTag("Ennemy");
+		return !character.CompareTag(Data.EnnemyTag);
 	}
 
 	public bool Attack(Character target)
 	{
-		cooldownAttack = 1 / AttackSpeed();
+		cooldownAttack = 1 / AttackSpeed;
 
 		animator.SetTrigger("Attack");
 
-		//TODO Critik
-		//TODO MAGIC DAMAGE
 		Debug.Log("I'm hiting. " + gameObject.name + "->" + Target.name);
 
 		return Hit(target);
@@ -149,46 +193,72 @@ public class Character : MonoBehaviour
 
 	protected virtual bool Hit(Character target)
 	{
-		return target.DoDamage(DamageValue());
+		Damage damage = DamageValue;
+		bool died = target.DoDamage(damage);
+		//KnockBack
+		if (!damage.isRegen) {
+			Damage.KnockBack(target, damage.value, transform.up);
+		}
+		return died;
 	}
+
 
 	internal void Initiate()
 	{
-		HP = MaxHP();
+		HP = MaxHP;
 	}
 
 	public bool DoDamage(Damage damage)
 	{
-		Debug.Log("I'm hited. " + gameObject.name + "<-" + Target.name);
-		//TODO DODGE
-		//TODO ARMOR
+		//DODGE
+		if (!damage.isRegen && Random.Range(0, 100) < DodgeRatio) {
+			popupManager.PopupValue("0", PopupData.Style.DODGE);
+			return false;
+		}
+
+
+		//ARMOR
+		damage.value = Mathf.Max(0, damage.value - Mathf.FloorToInt(Armor * (1 - damage.pourcentPenetration / 100)));
+
+		//POPUP
+		//TODO FACTORISER CODE
 		popupManager.PopupValue(damage.value.ToString(), damage.isRegen ? PopupData.Style.HEAL : damage.pourcentPenetration > 0 ? PopupData.Style.MAGIC : damage.isCritic ? PopupData.Style.CRITIC : PopupData.Style.DAMAGE);
+
+		//Update HP
 		HP += (damage.isRegen ? 1 : -1) * damage.value;
+
+		//REGEN Limite	
+		int max = MaxHP;
+		if (HP > max)
+			HP = max;
+
+		//DIE LIMIT
 		if (HP <= 0) {
 			Die();
 		}
-		int max = MaxHP();
-		if (HP > max)
-			HP = max;
-		var b = damage.isRegen ? HP == max : HP <= 0;
-		return b;
+
+		//return if must change target
+		return damage.isRegen ? HP == max : HP <= 0;
 	}
 
 	private void Die()
 	{
 		Debug.Log("I'm dying. " + gameObject.name);
 		animator.SetBool("Dead", true);
-		Destroy(gameObject, 0.1f);
+		Destroy(gameObject, 0.5f);
+		Destroy(this);
 	}
 
 	public void DefineTarget(Character character)
 	{
 		Target = character;
-		DefineAim(character.transform.position);
 	}
 
-	public void DefineAim(Vector2 aimPosition)
+	public void MoveTo()
 	{
-		transform.DOMove(aimPosition, TargetDistance / Speed());
+		if (TargetDistance > Range && Living) {
+
+			transform.Translate(Vector3.up * Speed * Time.deltaTime);
+		}
 	}
 }

@@ -17,10 +17,15 @@ MonoBehaviour:
   HPRatio: 0.5
   ArmorRatio: 0.5
   SpeedRatio: 2
-  CriticRatio: 2
+  CriticMultiRatio: 2
+  CriticProbaRatio: 10
   DodgeRatio: 2
   PhysicDommageRatio: 1
   RangeRatio: 1
   AttackSpeedRatio: 1
   ArmorPenetrationRatio: 0
   ManaRatio: 0
+  TargetTag: Ennemy
+  LaunchProjectile: 0
+  Projectile: {fileID: 0}
+  isHealer: 0

@@ -8,15 +8,19 @@ public class ClassData: ScriptableObject
 	public float HPRatio = 1;
 	public float ArmorRatio = 1;
 	public float SpeedRatio = 1;
-	public float CriticRatio = 1;
+	public float CriticMultiRatio = 1;
+	public int CriticProbaRatio = 1;
 	public float DodgeRatio = 1;
 	public float PhysicDommageRatio = 1;
 	public float RangeRatio = 1;
 	public float AttackSpeedRatio = 1;
 	public float ArmorPenetrationRatio = 1;
 	public float ManaRatio = 1;
+	public float KnonkBackResistRatio = 1;
+	public float KnonkBackImpactRatio = 1;
 	[Header("Projectile")]
 	public bool LaunchProjectile = false;
 	public GameObject Projectile;
-	//TODO HEALER SPEC
+	[Header("Heal")]
+	public bool isHealer = false;
 }

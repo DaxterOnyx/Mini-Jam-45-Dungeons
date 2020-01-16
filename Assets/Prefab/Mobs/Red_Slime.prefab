@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1784574337890002936}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: -0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6160123701034734039}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!212 &7347933833217239107
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -70,7 +70,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ed8c8deb48e00d749982c0efb446cee7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2066d9aadcf51bf47a4e33f963ea3d8c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -91,7 +91,7 @@ Animator:
   m_GameObject: {fileID: 1784574337890002936}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 82daa5779743e9e4e9f31b8c4e9b1720, type: 2}
+  m_Controller: {fileID: 9100000, guid: f279566d89748e944862ab86cb9cc927, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -150,6 +150,7 @@ MonoBehaviour:
   Data: {fileID: 11400000, guid: 7a018ee4a6d0b314a9f79f372efdfb4a, type: 2}
   popupManager: {fileID: 1581522381740182865}
   animator: {fileID: 2248572869640314470}
+  SpawnPoint: {fileID: 0}
 --- !u!50 &7067109632187244761
 Rigidbody2D:
   serializedVersion: 4
@@ -158,7 +159,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6160123701034734037}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0

@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: Assassin
   m_EditorClassIdentifier: 
   skills:
-  - id: 11
+  - id: 0
     name: node
-    dependencies: 
     unlocked: 0
+    cost: 0
+    dependencies: 
+    description: 
     editor_position: {x: 399, y: 412}

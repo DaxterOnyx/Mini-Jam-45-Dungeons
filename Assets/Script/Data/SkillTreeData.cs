@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New SkillTreeData", menuName = "Data/SkillTree")]
-public class SkillTreeData : ScriptableObject
+public class SkillTreeData : ScriptableObject, IComparer<Skill>
 {
 	// Array with all the skills in our skilltree
 	/// <summary>
@@ -58,5 +58,11 @@ public class SkillTreeData : ScriptableObject
 			Debug.LogError("SKILL NOT FOUND :" + id_skill);
 			return new Skill[0];
 		}
+	}
+
+	public int Compare(Skill x, Skill y)
+	{
+		return x.id - y.id;
+		//throw new System.NotImplementedException();
 	}
 }

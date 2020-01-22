@@ -298,9 +298,9 @@ public class NodeBasedEditor : EditorWindow
 		if (nodes != null && nodes.Count > 0) {
 			// We fill with as many skills as nodes we have
 
-			for (int i = 0; i < nodes.Count; i++) {
-				nodes[i].skill.id = i; 
-			}
+			//for (int i = 1; i <= nodes.Count; i++) {
+			//	nodes[i].skill.id = i; 
+			//}
 
 			MySkillTree.skills = new Skill[nodes.Count];
 			int[] dependencies;
@@ -329,8 +329,9 @@ public class NodeBasedEditor : EditorWindow
 				dependenciesList.Clear();
 				MySkillTree.skills[nodeIndex] = nodes[nodeIndex].skill;
 				MySkillTree.skills[nodeIndex].dependencies = dependencies;
+				//MySkillTree.skills[nodeIndex].editor_position = nodes[nodeIndex].rect.position; // est-ce utile de le rajouter ici ?? #labna
 			}
-
+			System.Array.Sort(MySkillTree.skills,MySkillTree.Compare); 
 			Debug.LogWarning("connection Weird" + connectionsToRemove.Count);
 			foreach (var item in connectionsToRemove) {
 				connections.Remove(item);
@@ -375,7 +376,7 @@ public class NodeBasedEditor : EditorWindow
 
 			nodes.Add(new Node(_skillTree[i].editor_position, 200, 100, nodeStyle, selectedNodeStyle, inPointStyle,
 			   outPointStyle, OnClickInPoint, OnClickOutPoint, OnClickRemoveNode,
-			   _skillTree[i].id, _skillTree[i].unlocked, _skillTree[i].name,
+			   _skillTree[i].id, _skillTree[i].unlocked, _skillTree[i].name, _skillTree[i].cost,
 			   _skillTree[i].dependencies));
 		}
 

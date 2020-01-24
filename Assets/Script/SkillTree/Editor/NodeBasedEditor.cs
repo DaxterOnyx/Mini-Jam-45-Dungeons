@@ -374,9 +374,9 @@ public class NodeBasedEditor : EditorWindow
 				nodes = new List<Node>();
 			}
 
-			nodes.Add(new Node(_skillTree[i].editor_position, 200, 100, nodeStyle, selectedNodeStyle, inPointStyle,
+			nodes.Add(new Node(_skillTree[i].editor_position, 200, 150, nodeStyle, selectedNodeStyle, inPointStyle,
 			   outPointStyle, OnClickInPoint, OnClickOutPoint, OnClickRemoveNode,
-			   _skillTree[i].id, _skillTree[i].unlocked, _skillTree[i].name, _skillTree[i].cost,
+			   _skillTree[i].id, _skillTree[i].unlocked, _skillTree[i].name, _skillTree[i].cost, _skillTree[i].description,
 			   _skillTree[i].dependencies));
 		}
 

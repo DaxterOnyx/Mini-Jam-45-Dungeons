@@ -10,21 +10,26 @@ public class Node
 	public bool isDragged;
 	public bool isSelected;
 
-	// Rect for the title of the node 
+	// REct for the ID of the node
 	public Rect rectID;
 	public Rect rectIDLabel;
+
 
 	// Two Rect for the unlock field (1 for the label and other for the checkbox)
 	public Rect rectUnlockLabel;
 	public Rect rectUnlocked;
 
-	// Two Rect for the cost field (1 for the label and other for the text field)
+	// Rect for the title of the node 
 	public Rect rectNameLabel;
 	public Rect rectName;
 
-	// Two Rect for the description field
+	// Two Rect for the cost field (1 for the label and other for the text field)
 	public Rect rectCostLabel;
 	public Rect rectCost;
+
+	// Two Rect for the description field
+	public Rect rectDescLabel;
+	public Rect rectDesc;
 
 	public ConnectionPoint inPoint;
 	public ConnectionPoint outPoint;
@@ -54,7 +59,7 @@ public class Node
 	public Node(Vector2 position, float width, float height, GUIStyle nodeStyle,
 		GUIStyle selectedStyle, GUIStyle inPointStyle, GUIStyle outPointStyle,
 		System.Action<ConnectionPoint> OnClickInPoint, System.Action<ConnectionPoint> OnClickOutPoint,
-		System.Action<Node> OnClickRemoveNode, int id, bool unlocked, string name, int cost, int[] dependencies)
+		System.Action<Node> OnClickRemoveNode, int id, bool unlocked, string name, int cost, string description,  int[] dependencies)
 	{
 		rect = new Rect(position.x, position.y, width, height);
 		skill.editor_position = rect.position;
@@ -72,7 +77,7 @@ public class Node
 		OnRemoveNode = OnClickRemoveNode;
 
 		// Create new Rect and GUIStyle for our title and custom fields
-		float rowHeight = height / 7;
+		float rowHeight = height / 10;
 
 		//rectID = new Rect(position.x, position.y + rowHeight, width, rowHeight);
 		rectIDLabel = new Rect(position.x, position.y + rowHeight, width / 2, rowHeight);
@@ -93,6 +98,9 @@ public class Node
 		rectCostLabel = new Rect(position.x, position.y + 5 * rowHeight, width / 2, rowHeight);
 		rectCost = new Rect(position.x + width / 2, position.y + 5 * rowHeight, width / 2 - 10, rowHeight);
 
+		rectDescLabel = new Rect(position.x, position.y + 6 * rowHeight, width / 2, rowHeight * 2);
+		rectDesc = new Rect(position.x + width / 2, position.y + 6 * rowHeight, width / 2 - 10, rowHeight * 2);
+
 		this.unlocked = unlocked;
 
 		// We create the skill with current node info
@@ -102,6 +110,7 @@ public class Node
 			unlocked = unlocked,
 			name = name,
 			cost = cost,
+			description = description,
 			dependencies = dependencies
 		};
 
@@ -115,7 +124,7 @@ public class Node
     public Node(Vector2 position, float width, float height,
 		GUIStyle nodeStyle, GUIStyle selectedStyle, GUIStyle inPointStyle, GUIStyle outPointStyle,
 		System.Action<ConnectionPoint> OnClickInPoint, System.Action<ConnectionPoint> OnClickOutPoint, System.Action<Node> OnClickRemoveNode
-		) : this(position, width, height, nodeStyle, selectedStyle, inPointStyle, outPointStyle, OnClickInPoint, OnClickOutPoint, OnClickRemoveNode, index++, false, "node", 0, null) { }
+		) : this(position, width, height, nodeStyle, selectedStyle, inPointStyle, outPointStyle, OnClickInPoint, OnClickOutPoint, OnClickRemoveNode, index++, false, "node", 0, "",null) { }
 
     public void Drag(Vector2 delta)
 	{
@@ -129,6 +138,8 @@ public class Node
 		rectNameLabel.position += delta;
 		rectCost.position += delta;
 		rectCostLabel.position += delta;
+		rectDesc.position += delta;
+		rectDescLabel.position += delta;
 	}
 
 	public void MoveTo(Vector2 pos)
@@ -143,6 +154,8 @@ public class Node
 		rectNameLabel.position = pos;
 		rectCost.position = pos;
 		rectCostLabel.position = pos;
+		rectDesc.position = pos;
+		rectDescLabel.position = pos;
 	}
 
 	public void Draw()
@@ -171,6 +184,9 @@ public class Node
 
 		GUI.Label(rectCostLabel, "Cost: ", styleField);
 		skill.cost = int.Parse(GUI.TextField(rectCost, skill.cost.ToString()));
+
+		GUI.Label(rectDescLabel, "Description: ", styleField);
+		skill.description = GUI.TextArea(rectDesc, skill.description);
 	}
 
 	public bool ProcessEvents(Event e)

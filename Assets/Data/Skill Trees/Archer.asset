@@ -18,26 +18,26 @@ MonoBehaviour:
     unlocked: 0
     cost: 0
     dependencies: 
-    description: 
-    editor_position: {x: 69, y: 122}
+    description: mine
+    editor_position: {x: 30, y: 94}
   - id: 101
     name: level
     unlocked: 0
     cost: 0
     dependencies: 01000000
-    description: 
-    editor_position: {x: 466, y: 63}
+    description: that's mine
+    editor_position: {x: 398, y: 42}
   - id: 102
     name: level 1 elem 2
     unlocked: 0
     cost: 0
     dependencies: 01000000
-    description: 
-    editor_position: {x: 453, y: 195}
+    description: this is better
+    editor_position: {x: 383, y: 200}
   - id: 103
     name: 3
     unlocked: 0
     cost: 0
     dependencies: 01000000
-    description: 
-    editor_position: {x: 451, y: 309}
+    description: this is even better
+    editor_position: {x: 363, y: 353}
